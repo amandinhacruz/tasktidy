@@ -1,8 +1,15 @@
-<div>
+<div class="input_container">
     <h3>Lista de Tarefas</h3>
-    <ul>
-        <li *ngFor="let tarefa of listaTarefa">
-            {{ tarefa.nome}}
+    <input type="text" placeholder="Criar tarefa" #inputTarefa 
+    (keyup.enter)="adicionar(inputTarefa.value);inputTarefa.value=''">
+    <button (click)="adicionar(inputTarefa.value)"><i class="fa fa-plus">Adicionar</i></button>
+    <ul *ngFor="let tarefa of listaTarefa">
+        <li >
+            <div (click)="completar(tarefa.id)">
+                {{ tarefa.nome}} <i *ngIf="tarefa.concluida" class="material-icons">done</i>
+            </div>
+            
         </li>
+        <i (click)="deletar(tarefa.id)" class="material-icons">delete</i>
     </ul>
 </div>
